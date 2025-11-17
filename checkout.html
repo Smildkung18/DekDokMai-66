@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title data-lang-key="site_title_checkout">ชำระเงิน - DekDokMai Shop</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="project_style.css">
+
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌸</text></svg>">
+</head>
+
+<body class="fade-in-start d-flex flex-column min-vh-100">
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand logo" href="index.html">
+                    <i class="bi bi-flower1"></i>
+                    DekDokMai Shop
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+
+                    <form class="d-flex me-auto" role="search" id="search-form" action="search_results.html"
+                        method="GET">
+                        <input class="form-control me-2" type="search" id="search-input" name="query"
+                            placeholder="ค้นหาสินค้า..." aria-label="Search" data-lang-key="nav_search_placeholder">
+                        <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button>
+                    </form>
+
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html" data-lang-key="nav_home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="shop.html" data-lang-key="nav_shop">Shop</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html" data-lang-key="nav_contact">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-cart-link active" aria-current="page" href="cart.html">
+                                <i class="bi bi-cart-fill"></i>
+                                <span class="badge rounded-pill bg-danger" id="cart-count">0</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link nav-profile-link" href="profile.html">
+                                <i class="bi bi-person-circle"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item lang-switcher">
+                            <a class="nav-link" href="#" id="lang-th" onclick="setLanguage('th'); return false;">TH</a>
+                            <span class="lang-divider">|</span>
+                            <a class="nav-link" href="#" id="lang-en" onclick="setLanguage('en'); return false;">EN</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="flex-grow-1">
+        <div class="container py-5">
+            <section id="checkout-section" class="py-5">
+                <h2 class="text-center display-4 fw-bold mb-5" data-aos="fade-up" data-lang-key="checkout_title">
+                    สรุปคำสั่งซื้อ</h2>
+
+                <div class="row g-5">
+
+                    <div class="col-lg-8">
+                        <div class="glass-card p-4" data-aos="fade-up" data-aos-delay="100">
+
+                            <h4 class="fw-bold mb-3" data-lang-key="checkout_item_list">รายการสินค้า</h4>
+                            <ul class="list-group list-group-flush checkout-summary-list" id="checkout-summary-list">
+                            </ul>
+
+                            <hr class="product-divider">
+
+                            <h4 class="fw-bold mt-4 mb-3" data-lang-key="checkout_payment_method">เลือกช่องทางชำระเงิน
+                            </h4>
+                            <div class="payment-options">
+                                <div class="form-check glass-card p-3 mb-2">
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="payment-qr"
+                                        checked>
+                                    <label class="form-check-label" for="payment-qr">
+                                        <i class="bi bi-qr-code"></i>
+                                        <span data-lang-key="checkout_payment_qr">สแกน QR Code</span>
+                                    </label>
+                                </div>
+                                <div class="form-check glass-card p-3 mb-2">
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="payment-bank">
+                                    <label class="form-check-label" for="payment-bank">
+                                        <i class="bi bi-bank"></i>
+                                        <span data-lang-key="checkout_payment_bank">โอนผ่านบัญชีธนาคาร</span>
+                                    </label>
+                                </div>
+                                <div class="form-check glass-card p-3">
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="payment-cod"
+                                        disabled>
+                                    <label class="form-check-label text-white-50" for="payment-cod">
+                                        <i class="bi bi-truck"></i>
+                                        <span data-lang-key="checkout_payment_cod">เก็บเงินปลายทาง...</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="glass-card p-4 summary-card" data-aos="fade-up" data-aos-delay="200">
+                            <h4 class="fw-bold mb-3" data-lang-key="checkout_summary_title">สรุปยอด</h4>
+
+                            <div class="d-flex justify-content-between mb-2">
+                                <span data-lang-key="checkout_subtotal">ยอดรวมสินค้า</span>
+                                <strong id="checkout-subtotal">0 บาท</strong>
+                            </div>
+
+                            <div class="d-flex justify-content-between mb-2" id="discount-row" style="display: none;">
+                                <span data-lang-key="checkout_discount_label">ส่วนลด (50%)</span>
+                                <strong id="checkout-discount" class="text-danger">-0 บาท</strong>
+                            </div>
+
+                            <div class="d-flex justify-content-between mb-3 text-white-50">
+                                <span data-lang-key="checkout_shipping">ค่าจัดส่ง</span>
+                                <strong id="shipping-cost-display">50 บาท</strong>
+                            </div>
+
+                            <hr class="product-divider">
+
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <span class="h5 mb-0" data-lang-key="checkout_total">ยอดสุทธิ</span>
+                                <strong class="h2 mb-0" id="checkout-total">0 บาท</strong>
+                            </div>
+
+                            <div class="d-grid">
+                                <button class="btn btn-primary btn-lg" onclick="confirmOrder()">
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    <span data-lang-key="checkout_confirm_button">ยืนยันคำสั่งซื้อ</span>
+                                </button>
+                            </div>
+
+                            <h5 class="fw-bold mt-4" data-lang-key="checkout_coupon_title">โค้ดส่วนลด</h5>
+                            <div class="coupon-form">
+                                <input type="text" class="form-control" id="coupon-input" placeholder="กรอกโค้ด"
+                                    data-lang-key="checkout_coupon_placeholder">
+                                <button class="btn btn-primary" id="coupon-apply-btn" onclick="applyCoupon()">
+                                    <span data-lang-key="checkout_coupon_apply">ใช้โค้ด</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer id="contact" class="mt-auto py-4">
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+    <script src="lang.js"></script>
+    <script src="translate.js"></script>
+    <script src="cart.js"></script>
+
+    <script> AOS.init({ once: true, duration: 800 }); </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.body.classList.remove('fade-in-start');
+
+            updateCartCounter();
+            translatePage();
+            updateLangSwitcherUI();
+            updateCheckoutSummaryAndTotal();
+        });
+
+        document.addEventListener('click', function (e) {
+            let link = e.target.closest('a');
+            if (e.target.closest('.lang-switcher a')) { return; }
+            if (e.target.closest('button[onclick]')) { return; }
+            if (link && link.href && link.target !== '_blank' && !link.href.match(/#$/) && !link.getAttribute('href').startsWith('#')) {
+                e.preventDefault();
+                document.body.classList.add('fade-out');
+                setTimeout(() => { window.location.href = link.href; }, 500);
+            }
+        });
+    </script>
+
+    <script>
+        function updateLangSwitcherUI() {
+            const lang = getCurrentLanguage();
+            document.getElementById('lang-th').classList.toggle('active', lang === 'th');
+            document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+        }
+        const shippingCost = 50;
+        const validCoupon = "GRADE-A"; // (โค้ดที่ถูกต้อง)
+        const discountPercent = 0.5; // (50%)
+        let isCouponApplied = false;
+        function updateCheckoutSummaryAndTotal() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const summaryList = document.getElementById('checkout-summary-list');
+            const currencyUnit = ` ${getTranslation('detail_price_unit')}`;
+
+            let subtotal = 0;
+            summaryList.innerHTML = ''; // (ล้างของเก่าก่อน)
+
+            if (cart.length === 0) {
+                summaryList.innerHTML = `<li class="list-group-item">${getTranslation('checkout_no_items')}</li>`;
+            } else {
+                cart.forEach(item => {
+                    const itemTotal = item.price * item.quantity;
+                    subtotal += itemTotal;
+
+                    const li = document.createElement('li');
+                    li.className = 'list-group-item d-flex justify-content-between align-items-center';
+                    li.innerHTML = `
+                        <span>${getTranslation(item.nameKey)} (x${item.quantity})</span>
+                        <strong>${itemTotal.toLocaleString()}${currencyUnit}</strong>
+                    `;
+                    summaryList.appendChild(li);
+                });
+            }
+            let discountAmount = 0;
+            const discountRow = document.getElementById('discount-row');
+            const discountDisplay = document.getElementById('checkout-discount');
+
+            if (isCouponApplied) {
+                discountAmount = subtotal * discountPercent;
+                discountDisplay.textContent = `-${discountAmount.toLocaleString()}${currencyUnit}`;
+                discountRow.style.display = 'flex'; // (โชว์แถวส่วนลด)
+            } else {
+                discountRow.style.display = 'none'; // (ซ่อนแถวส่วนลด)
+            }
+            const total = (subtotal - discountAmount) + shippingCost;
+
+            document.getElementById('checkout-subtotal').textContent = `${subtotal.toLocaleString()}${currencyUnit}`;
+            document.getElementById('shipping-cost-display').textContent = `${shippingCost.toLocaleString()}${currencyUnit}`;
+            document.getElementById('checkout-total').textContent = `${total.toLocaleString()}${currencyUnit}`;
+        }
+        function applyCoupon() {
+            const input = document.getElementById('coupon-input');
+            const btn = document.getElementById('coupon-apply-btn');
+            const couponCode = input.value.trim().toUpperCase(); // (แปลงเป็นพิมพ์ใหญ่)
+
+            if (couponCode === validCoupon) {
+                isCouponApplied = true;
+                btn.innerHTML = `<i class="bi bi-check-lg"></i> <span data-lang-key="checkout_coupon_applied">${getTranslation('checkout_coupon_applied')}</span>`;
+                btn.classList.add('btn-success-custom');
+                btn.classList.remove('btn-danger-custom');
+                btn.disabled = true;
+                input.disabled = true;
+
+            } else {
+                isCouponApplied = false;
+                btn.innerHTML = `<i class="bi bi-x-lg"></i> <span data-lang-key="checkout_coupon_invalid">${getTranslation('checkout_coupon_invalid')}</span>`;
+                btn.classList.add('btn-danger-custom');
+                btn.classList.remove('btn-success-custom');
+                btn.style.animation = 'shake 0.5s';
+                setTimeout(() => {
+                    btn.style.animation = '';
+                    btn.innerHTML = `<span data-lang-key="checkout_coupon_apply">${getTranslation('checkout_coupon_apply')}</span>`;
+                    btn.classList.remove('btn-danger-custom');
+                }, 2000);
+            }
+            updateCheckoutSummaryAndTotal();
+        }
+        function confirmOrder() {
+            localStorage.removeItem('cart');
+            updateCartCounter();
+
+            document.body.classList.add('fade-out');
+            setTimeout(() => {
+                window.location.href = 'confirmation.html';
+            }, 500);
+        }
+    </script>
+</body>
+
+</html>
